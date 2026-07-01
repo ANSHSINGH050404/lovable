@@ -1,6 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 import { ZodError } from "zod";
 import { AuthError } from "../services/auth.service";
+import { ProjectError } from "../services/project.service";
 
 export function errorHandler(
   err: Error,
@@ -19,7 +20,7 @@ export function errorHandler(
     return;
   }
 
-  if (err instanceof AuthError) {
+  if (err instanceof AuthError || err instanceof ProjectError) {
     res.status(err.statusCode).json({ error: err.message });
     return;
   }
