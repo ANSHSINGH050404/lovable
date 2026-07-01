@@ -79,18 +79,3 @@ export async function remove(
   }
 }
 
-export async function getFiles(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
-  try {
-    const files = await projectService.getProjectFiles(
-      req.user!.userId,
-      Number(req.params.id)
-    );
-    res.json(files);
-  } catch (err) {
-    next(err);
-  }
-}
